@@ -1,0 +1,42 @@
+# voidrift-web-client
+
+VoidRift Web UI frontend — the thin browser client: SSR shell, streaming transcript, approvals, panels, accessible (WCAG 2.1 AA). Reaches the SDK only through the web-server HTTP + WebSocket surface (web-blueprint.md).
+
+Package `voidrift-web-client` · kind: `product` · repo: `voidrift-web-client`. This folder is its own git project; commit here.
+
+## What this is
+A client application. It owns its SDK version and depends only on `@voidrift/core`, never on another product.
+
+## Specification
+Governing blueprints: `blueprint.md`, `web-blueprint.md`, `panels-blueprint.md`. They are maintained outside this repository by the project owner and are the
+authoritative specifications; code follows them, never the reverse. Section numbers (`§N.N`) cited in code
+comments and tests stay stable. A spec change needs the owner's approval.
+
+## Dependencies
+- no internal VoidRift packages
+- No source or test imports another package by relative path or reaches into its `dist`; use declared dependencies only.
+- Before adding a dependency check its license: shipped dependencies (`dependencies`, `peerDependencies`, anything bundled) must be Apache-2.0 or more permissive (MIT, BSD, ISC); reject copyleft, including weak copyleft (MPL, EPL, CDDL). Dev-only tooling is not restricted.
+- Depend on LangChain abstractions (`BaseChatModel`), not provider implementations. There is no automatic model failover (owner decision 2026-10-18).
+
+## Build and verify
+Run from this folder. Scripts:
+- `npm run build`
+- `npm run typecheck`
+- `npm run test`
+- `npm run coverage`
+- TypeScript strict, ESM. Single test file: `npx vitest run <file>`.
+- Lint and the package-graph checks are not configured in this repository yet.
+
+## Testing
+- Everything is tested. A bug fix carries a regression test; a new feature carries tests before it is complete.
+- Statement coverage: ≥80% per package, ≥90% for entities and use-cases, ≥70% for adapters.
+- Tests mirror the source directory structure; use in-memory implementations of repository interfaces, `InMemoryTransport` from `@modelcontextprotocol/sdk` for MCP tests, and `hermeticTmp(label)` for test directories (never a fixed `/tmp/voidrift-*` path).
+- Fit for the target: VoidRift runs against local models (Ollama, vLLM), OpenAI-compatible proxies and cloud APIs; a feature that works on only one provider is not correct.
+
+## Conventions
+- Configuration files are JSON; prose is Markdown. Filename slugs are lowercase alphanumerics and hyphens.
+- Every rigid limit (size, count, time, ratio) is an entry in the one `limits` registry (`core-blueprint.md` §13.11); there are no hidden limits.
+
+## Git
+- Conventional commits (`feat:`, `fix:`, `refactor:`, `test:`, `docs:`, `chore:`).
+- Build and test before pushing. No force pushes, no amending pushed commits.
