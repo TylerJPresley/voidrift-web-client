@@ -23,7 +23,8 @@
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
-    "coverage": "vitest --run --coverage"
+    "coverage": "vitest --run --coverage",
+    "lint": "eslint src"
   },
   "dependencies": {
     "react": "19.3.0",
@@ -39,7 +40,10 @@
     "@vitest/coverage-v8": "5.0.3",
     "jsdom": "30.1.2",
     "typescript": "5.9.3",
-    "vitest": "5.0.3"
+    "vitest": "5.0.3",
+    "eslint": "10.12.0",
+    "eslint-config-prettier": "10.1.8",
+    "typescript-eslint": "8.71.1"
   },
   "voidrift": {
     "kind": "product"
@@ -47,5 +51,16 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TylerJPresley/voidrift-web-client.git"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/TylerJPresley/voidrift-web-client/issues"
+  },
+  "homepage": "https://github.com/TylerJPresley/voidrift-web-client#readme",
+  "keywords": [
+    "voidrift",
+    "web",
+    "frontend",
+    "thin",
+    "browser"
+  ]
 }
