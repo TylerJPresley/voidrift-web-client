@@ -5,7 +5,7 @@ VoidRift Web UI frontend — the thin browser client: SSR shell, streaming trans
 Part of VoidRift, a local-first, model-agnostic AI agent harness. Status: work in progress. Not yet usable or released. The VoidRift CLI and core are the current focus.
 
 ## Requirements
-- Node.js >=22
+- Node.js >=24
 
 ## Build from source
 ```bash
